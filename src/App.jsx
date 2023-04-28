@@ -19,7 +19,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import dp1 from "./assets/dp1.jpg";
-const reptiles = ["alligator", "snake", "lizard"];
+import Spinner from "react-activity/dist/Dots";
+import "react-activity/dist/Dots.css";
 
 const items = [
   {
@@ -62,10 +63,12 @@ const navIcons = [
 function App() {
   const [projectList, setprojectList] = useState([]);
   const projectCollection = collection(db, "files");
+  const [isLoading, setIsloading] = useState(false);
 
   const getProjectList = async () => {
     //read the data
     //set the project list
+    setIsloading(true);
     try {
       const data = await getDocs(projectCollection);
       const filterData = data.docs.map((doc) => ({
@@ -73,6 +76,7 @@ function App() {
         id: doc.id,
       }));
       setprojectList(filterData);
+      setIsloading(false);
       setprojectList((c) => {
         console.log(c);
         return c;
@@ -181,43 +185,42 @@ function App() {
           <div className="text-xl md:text-4xl font-bold tracking-tight">
             Projects
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {projectList.map((item) => (
-              <div className=" bg-cardPurple rounded-xl  border-solid drop-shadow-2xl p-3 w-full  ">
-                <div className="relative overflow-hidden rounded-xl">
-                  <img
-                    src={
-                      "https://images.unsplash.com/photo-1661956600684-97d3a4320e45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                    }
-                    className="w-full"
-                  />
-                </div>
-                <div className="text-xl text-center font-bold tracking-tight mt-2">
-                  {item.title}
-                </div>
-                <div className="text-base text-center  tracking-tight text-gray">
-                  {item.description}
-                </div>
-                <div className="flex justify-center gap-2 my-2">
-                  <ol className="">
-                    {item.categories.map((cat) => (
-                      <li className="bg-textPurple w-fit rounded-full px-3 py-1 text-xs float-left mx-1">
-                        {cat}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-                <div className="flex justify-between gap-2 ">
-                  <div className="bg-dark w-full py-2 text-center rounded-md font-bold hover:cursor-pointer hover:b">
-                    Source Cdoe
+          {!isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              {projectList.map((item) => (
+                <div className=" bg-cardPurple rounded-xl  border-solid drop-shadow-2xl p-3 w-full">
+                  <div className="relative overflow-hidden rounded-xl bg-dark h-48">
+                    <img src={item.sourceCodeUrl} className="w-full" />
                   </div>
-                  <div className="bg-dark w-full py-2 text-center rounded-md font-bold">
-                    Preview
+                  <div className="text-xl text-center font-bold tracking-tight mt-2">
+                    {item.title}
+                  </div>
+                  <div className="text-base text-center  tracking-tight text-gray">
+                    {item.description}
+                  </div>
+                  <div className="flex justify-center gap-2 my-2">
+                    <ol className="">
+                      {item.categories.map((cat) => (
+                        <li className="bg-textPurple w-fit rounded-full px-3 py-1 text-xs float-left mx-1">
+                          {cat}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                  <div className="flex justify-between gap-2 ">
+                    <div className="bg-dark w-full py-2 text-center rounded-md font-bold hover:cursor-pointer hover:b">
+                      Source Cdoe
+                    </div>
+                    <div className="bg-dark w-full py-2 text-center rounded-md font-bold">
+                      Preview
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <Spinner className="self-center" />
+          )}
         </div>
       </section>
 
