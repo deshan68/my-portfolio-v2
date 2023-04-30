@@ -42,7 +42,7 @@ const items = [
 const navIcons = [
   {
     name: <FaInstagram size={20} />,
-    href: "#",
+    href: "https://instagram.com/arun_6.8?igshid=YmMyMTA2M2Y=",
   },
   {
     name: <FaLinkedinIn size={20} />,
@@ -50,13 +50,16 @@ const navIcons = [
   },
   {
     name: <FaFacebook size={20} />,
-    href: "#",
+    href: "https://www.facebook.com/arun.deshan?mibextid=LQQJ4d",
   },
   {
     name: <FaTwitter size={20} />,
-    href: "#",
+    href: "https://twitter.com/DeshanGaa",
   },
-  { name: <FaStackOverflow size={20} />, href: "#" },
+  {
+    name: <FaStackOverflow size={20} />,
+    href: "https://stackoverflow.com/users/20976298/arun-deshan?tab=profile",
+  },
   { name: <FaGithub size={20} />, href: "https://github.com/DESHAN68" },
 ];
 
@@ -77,10 +80,6 @@ function App() {
       }));
       setprojectList(filterData);
       setIsloading(false);
-      setprojectList((c) => {
-        console.log(c);
-        return c;
-      });
     } catch (err) {
       console.log(err);
     }
@@ -92,75 +91,84 @@ function App() {
 
   return (
     <div className="min-h-full">
-      <Disclosure
-        as="nav"
-        className="sticky top-0 z-10 backdrop-blur-sm bg-lightGreen/80 "
-      >
-        {({ open }) => (
-          <>
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-              <div className="relative flex h-16 items-center justify-between">
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
-                    {open ? (
-                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                    ) : (
-                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                    )}
-                  </Disclosure.Button>
-                </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
-                    <span className="font-bold text-base">developByArun</span>
+      <>
+        <Disclosure
+          as="nav"
+          className="sticky top-0 z-10 backdrop-blur-sm bg-lightGreen/80 "
+        >
+          {({ open }) => (
+            <>
+              <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div className="relative flex h-16 items-center justify-between">
+                  <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    {/* Mobile menu button*/}
+                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                      <span className="sr-only">Open main menu</span>
+                      {open ? (
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <Bars3Icon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </Disclosure.Button>
                   </div>
-                </div>
-                <div className="absolute gap-5 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
-                  <div className="hidden sm:ml-6 sm:block">
-                    <div className="flex space-x-4">
-                      {navIcons.map((item) => (
-                        <button type="button" className="">
-                          <a href={item.href} target="_blank">
-                            {item.name}
-                          </a>
-                        </button>
-                      ))}
+                  <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div className="flex flex-shrink-0 items-center">
+                      <span className="font-bold text-base">developByArun</span>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="border-2 border-white border-solid rounded-md px-4 py-1 "
-                  >
-                    <span className="">Resume</span>
-                  </button>
+                  <div className="absolute gap-5 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
+                    <div className="hidden sm:ml-6 sm:block">
+                      <div className="flex space-x-4">
+                        {navIcons.map((item) => (
+                          <button type="button" className="" key={item.name}>
+                            <a href={item.href} target="_blank">
+                              {item.name}
+                            </a>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="border-2 border-white border-solid rounded-md px-4 py-1 "
+                    >
+                      <span className="">Resume</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <Disclosure.Panel className="sm:hidden">
-              <div className="space-y-1 px-2 pb-3 pt-2 justify-center flex flex-col items-center ">
-                {navIcons.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className={
-                      (item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium")
-                    }
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
-                ))}
-              </div>
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
+              <Disclosure.Panel className="sm:hidden">
+                <div className="space-y-1 px-2 pb-3 pt-2 justify-center flex flex-col items-center ">
+                  {navIcons.map((item) => (
+                    <Disclosure.Button
+                      key={item.name}
+                      as="a"
+                      href={item.href}
+                      className={
+                        (item.current
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "block rounded-md px-3 py-2 text-base font-medium")
+                      }
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  ))}
+                </div>
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+      </>
+
       <main className="shadow bg-gradient-to-b from-darkgreen to-darkPurple h-full">
         <div className="mx-auto max-w-7xl px-4  sm:px-6 lg:px-8 flex pt-10">
           <div className="w-2/3 gap-4 flex flex-col pr-2">
@@ -188,9 +196,15 @@ function App() {
           {!isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {projectList.map((item) => (
-                <div className=" bg-cardPurple rounded-xl  border-solid drop-shadow-2xl p-3 w-full">
-                  <div className="relative overflow-hidden rounded-xl bg-dark h-48">
-                    <img src={item.sourceCodeUrl} className="w-full" />
+                <div
+                  key={item.sourceCodeUrl}
+                  className=" bg-cardPurple rounded-xl  border-solid drop-shadow-2xl p-3 w-full flex flex-col justify-around "
+                >
+                  <div className="overflow-hidden rounded-xl bg-dark flex ">
+                    <img
+                      src={item.imageUrl}
+                      className="h-full w-full object-cover object-center"
+                    />
                   </div>
                   <div className="text-xl text-center font-bold tracking-tight mt-2">
                     {item.title}
@@ -201,19 +215,30 @@ function App() {
                   <div className="flex justify-center gap-2 my-2">
                     <ol className="">
                       {item.categories.map((cat) => (
-                        <li className="bg-textPurple w-fit rounded-full px-3 py-1 text-xs float-left mx-1">
+                        <li
+                          key={cat}
+                          className="bg-textPurple w-fit rounded-md px-3 py-1 text-xs float-left mx-1"
+                        >
                           {cat}
                         </li>
                       ))}
                     </ol>
                   </div>
                   <div className="flex justify-between gap-2 ">
-                    <div className="bg-dark w-full py-2 text-center rounded-md font-bold hover:cursor-pointer hover:b">
-                      Source Cdoe
-                    </div>
-                    <div className="bg-dark w-full py-2 text-center rounded-md font-bold">
-                      Preview
-                    </div>
+                    <a
+                      target="_blank"
+                      href={item.repoLink}
+                      className="bg-dark w-full py-2 text-center rounded-md font-bold hover:cursor-pointer"
+                    >
+                      <div>Source Cdoe</div>
+                    </a>
+                    <a
+                      target="_blank"
+                      href={item.hostLink}
+                      className="bg-dark w-full py-2 text-center rounded-md font-bold hover:cursor-pointer"
+                    >
+                      <div>Preview</div>
+                    </a>
                   </div>
                 </div>
               ))}
@@ -224,8 +249,8 @@ function App() {
         </div>
       </section>
 
-      <footer className="shadow bg-dark py-16">
-        <div className="mx-auto max-w-7xl px-4  flex flex-col text-center text-sm font-light">
+      <footer className=" bg-dark py-16">
+        <div className=" max-w-7xl px-4  flex flex-col text-center text-sm font-light">
           Copyright @ 2023 developByArun Inc. All rights reserved.
         </div>
       </footer>
